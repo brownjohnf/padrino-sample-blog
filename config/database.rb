@@ -19,10 +19,21 @@ ActiveRecord::Base.configurations[:development] = {
 
 }
 
-ActiveRecord::Base.configurations[:production] = {
-  :adapter => 'pg',
-  :database => Padrino.root('db', 'padrino_sample_blog_production.db')
+#ActiveRecord::Base.configurations[:production] = {
+#  :adapter => 'pg',
+#  :database => Padrino.root('db', 'padrino_sample_blog_production.db')
+#
+#}
 
+postgres = URI.parse(ENV['HEROKU_POSTGRESQL_ORANGE_URL'] || '')
+
+ActiveRecord::Base.configurations[:production] = {
+  :adapter  => 'postgresql',
+  :encoding => 'utf8',
+  :database => postgres.path[1..-1], 
+  :username => postgres.user,
+  :password => postgres.password,
+  :host     => postgres.host
 }
 
 ActiveRecord::Base.configurations[:test] = {
