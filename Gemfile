@@ -8,12 +8,21 @@ source :rubygems
 gem 'rake'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
+gem 'pg'
+
 # Component requirements
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'compass'
 gem 'haml'
 gem 'activerecord', :require => "active_record"
-gem 'sqlite3'
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :test do
+  gem 'sqlite3'
+end
 
 # Test requirements
 gem 'shoulda', :group => "test"
